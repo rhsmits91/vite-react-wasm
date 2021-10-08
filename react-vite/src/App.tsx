@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from "react";
-
-const loader = import("../../engine/pkg");
+import React, { useEffect } from "react";
+import init, { start } from "../../engine/pkg";
 
 const App: React.FC = () => {
-  const [engine, setEngine] = useState<any>();
-
   useEffect(() => {
-    loader.then((res) => setEngine(res)).catch(console.error);
-  });
-
-  if (!engine) return null;
-
-  console.log(engine, "hi engine!");
+    init().then(() => {
+      console.log(start, "init wasm-pack");
+      start && start();
+    });
+  }, []);
 
   return (
     <div className="App">
