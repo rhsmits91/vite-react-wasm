@@ -1,39 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+const loader = import("../../engine/pkg");
 
 const App: React.FC = () => {
-  const [count, setCount] = useState(0);
+  const [engine, setEngine] = useState<any>();
+
+  useEffect(() => {
+    loader.then((res) => setEngine(res)).catch(console.error);
+  });
+
+  if (!engine) return null;
+
+  console.log(engine, "hi engine!");
 
   return (
     <div className="App">
       <header className="App-header">
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {" | "}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
+        <p>Hello Vite + React + Wasm + Canvas</p>
+        <canvas id="canvas" height="150" width="150" />
       </header>
     </div>
   );
