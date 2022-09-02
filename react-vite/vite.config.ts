@@ -8,4 +8,10 @@ export default defineConfig({
     minify: false,
   },
   plugins: [react(), wasmPack(["../engine"])],
+  server: {
+    fs: {
+      // Allow serving files from one level up to the project root
+      allow: [".."],
+    },
+  },
 });
